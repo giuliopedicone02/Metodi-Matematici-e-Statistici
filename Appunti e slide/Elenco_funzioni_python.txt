@@ -1,0 +1,87 @@
+FUNZIONI PER LE DISTRIBUZIONI
+- from scipy.stats import binom ---> variabile aleatoria discreta binomiale
+	- binom.pmf(k, n, p) --> densità discreta (funzione di massa di probabilità), k è il numero di successi, n è il numero di prove e p è la probabilità di successo nella singola prova
+
+- from scipy.stats import poisson ---> variabile aleatoria discreta di Poisson
+	- poisson.pmf(x, lam) --> densità discreta (funzione di massa di probabilità), x è il numero di eventi per intervallo di tempo e lam è il numero medio di eventi per intervallo di tempo
+
+- from scipy.stats import uniform --> variabile aleatoria continua uniforme
+	- uniform.pdf(x, loc, scale) --> loc indica l'estremo inferiore dell'intervallo mentre scale indica la lunghezza di questo, quindi la distribuzione sarà uniforme in 
+[loc, loc+scale] 
+
+- from scipy.stats import norm --> variabile aleatoria continua normale
+	- norm.pdf(x, loc, scale) --> densità continua (probability density function) (loc e scale indicano media e dev. standard, di default hanno valore 0 e 1 (legge normale standard))
+	- norm.cdf(x, loc, scale) --> funzione di ripartizione (cumulative distribution function)
+	- norm.ppf(alpha) --> funzione inversa della cdf, serve per trovare il valore del quantile dato l'ordine alpha (percent point function)
+
+- from scipy.stats import expon --> variabile aleatoria continua esponenziale
+	- expon.pdf(x, loc, scale) --> se vogliamo utilizzare una distribuzione esponenziale di parametro lambda [EXP(lambda)] allora settiamo loc a zero e scale a 1/lambda 
+
+- from scipy.stats import skew 
+	- skew(array) --> calcola il coefficente di asimmetria (skewness) dell'array (vedi pdf 5_Statistica pag 12)
+
+- from scipy.stats import kurtosis 
+	- kurtosis(array, fisher=False) --> calcola la kurtosi dell'array, se fisher=False viene utilizzata la definizione di Pearson (coeff = 3.0 per approssimare a distrib. normale) (vedi pdf 5_Statistica pag 12)
+
+- from scipy.stats import t --> distribuzione continua di student 
+	- t.ppf(alpha, df) --> inverso della cdf, con df gradi di libertà (degree of freedom)
+
+- from scipy.stats import chi2 --> distribuzione continua chi-quadro
+
+- from scipy.stats import rankdata
+	- rankdata(array) --> assegna rango ai dati (vedi test di Kruskal-Wallis)
+
+FUNZIONI MATEMATICHE
+- from scipy.special import binom ---> coefficiente binomiale --> ex: binom(n, k)
+- import numpy as np
+	- np.sqrt(x) --> radice quadrata di x
+	- np.arange(start, stop) --> ritorna array di valori nell'intervallo [start, stop), è possibile utilizzare un terzo parametro (step) che indica la distanza tra un valore ed il successivo
+	- np.linspace(start, stop, num=50) --> simile ad arange, ma usata solitamente con i float
+	- np.array(object) --> ritorna un array  
+	- np.sum(array)
+	- np.cumsum(array) --> ritorna la somma cumulativa degli elementi dell'array
+	- np.insert(array, index, value) --> inserisci un nuovo valore nell'indice indicato
+	- np.zeros(size, dtype=int) --> ritorna array di interi di dimensione size riempito con zeri (np.ones() fa la stessa cosa ma riempie l'array con 1)
+	- np.loadtxt(nomefile) --> ritorna un array contenente i dati del file
+	- np.mean(array) --> ritorna media aritmetica
+	- np.std(array, ddof=0) --> ritorna deviazione standard (ddof è il Delta Degree of Freedom, in pratica il divisore usato nei calcoli è N-ddof)
+	- np.random.uniform(start, stop, num) --> ritorna num valori che seguono una distribuzione uniforme a partire con valori compresi tra start e stop
+	- np.random.exponential(scale, num) --> ritorna num valori che seguono una distribuzione esponenziale di parametro scale
+	- np.concatenate(array1, array2, ..., arrayn) --> concatena gli array (valori uguali sono preservati)
+	- np.linalg.pinv(X) --> calcola la matrice pseudo-inversa di X
+	- np.dot(X, Y) --> prodotto riga per colonna (# di colonne di X deve essere uguale al # di righe di Y), si può ottenere anche facendo "X @ Y"
+	- np.linalg.inv(X) --> calcola la matrice inversa di X
+	- np.random.rand() --> genera numeri pseudo-casuali con distribuzione uniforme nell'intervallo [0, 1[
+	- np.nonzero(array) --> ritorna tuple di array contenenti gli indici che non contengono zero (cioè viene tornato un array per ogni dimensione dell'array passato), se ad ex l'array passato ha una sola dimensione posso accedere all'array risultante tramite np.nonzero(array)[0] e ai suoi corrispondenti valori (che sono gli indici che cercavamo) tramite np.nonzero(array)[i]
+	- np.linalg.eig(X) --> calcola gli autovalori ed autovettori destri di una matrice quadrata (ritorna 2 array)
+	- np.real(X) --> ritorna la parte reale di un argomento complesso
+
+- range(start, stop) --> crea una sequenza di numeri da start a stop (stop non incluso)
+ 
+FUNZIONI GRAFICHE
+- import matplotlib.pyplot as plt
+	- plt.plot(x, y, '.', label='') --> x sono i valori in ascissa, y quelli in ordinata, '.' è un simbolo che rappresenta i singoli punti (necessario se la distribuzione è discreta, altrimenti il grafico unirà i punti), label può essere usato per indicare un etichetta (che è possibile mostrare in una leggenda); ax.legend(loc='upper left') --> mostra la leggenda in alto a sinistra
+	- plt.xlabel('') --> descrivi l'etichetta dell'asse x
+	- plt.xticks(np.arange(start, stop, step)) --> per definire precisione e frequenza dell'asse x
+	- plt.show() --> mostra il grafico
+	- plt.subplots(nrows, ncol) --> ritorna un oggetto Figure e un array di assi, può essere utilizzato per personalizzare il grafico e creare più sottografici (non necessario); Axes.set_title() / Axes.set_xlabel() / Axes.set_ylabel()
+	- plt.bar(x, y, width) --> crea un grafico a barre (istogramma), width = ampiezza delle barre, i valori dell'asse x corrispondono al centro di ogni barra, poi la funzione equamente distribuisce metà barra a sinistra e metà a destra (questo perchè align='center')
+	- axes.Axes.hist(array, bins=20, edgecolor="black") --> crea un istogramma di 20 barre di uguale ampiezza con i colori dei bordi neri, la differerenza principale con plt.bar() è che hist() si occupa principalmente di dati numerici. Parametro density=True per mostrare la densità di probabilità  
+	- axes.Axes.pie(array, labels=array2, autocpt='%1.1f%%') --> crea grafico a torta, a labels si può assegnare un array per mostrare le etichette, mentre autopct serve per mostrare le percentuali di ciascuna fetta (formato a scelta)
+	- axes.Axes.boxplot(array) --> crea un box plot
+
+- from scipy.stats import probplot
+	- probplot(array, dist=norm, plot=ax) --> crea un grafico di probabilità dei dati campione (array) confrontati con i quantili teorici della distribuzione specificata, la distribuzione di default è normale (norm) e si può cambiare con il parametro dist (ad ex dist=uniform opp expon (bisogna importare ognuna di queste distribuzioni da scipy.stats))
+
+N.B.
+- pmf == probability mass function --> densità nel caso discreto
+- pdf == probability density function --> densità nel caso continuo
+- cdf == comulative distribution function (funzione di ripartizione)- 
+- x**y == pow(x,y)
+- display(x) per stampare a video x
+- operator ':' --> estrae parti di un array, richiede due argomenti: l'inizio del taglio e la fine, se omessi si riferiscono rispettivamente a 0 e alla fine della sequenza, ad ex: array[:,0] indica tutta la prima colonna, mentre array[0,:] indica tutta la prima riga
+- array/5 --> il risultato è un array simile a quello di partenza, ma con ogni elemento diviso per 5
+- array.astype(dtype) --> converte l'array nel tipo dtype
+- se X è una matrice --> X.T indica la sua trasposta (scambio righe e colonne)
+- np.random --> By default, with no seed provided, default_rng will create seed the RNG from nondeterministic data from the operating system and therefore generate different numbers each time
+- str(x) --> converte x in una stringa 
