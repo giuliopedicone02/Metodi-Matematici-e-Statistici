@@ -12,6 +12,7 @@ Repository creata a scopo didattico per essere utilizzata come backup dei file c
 ## Authors
 
 - [@giuliopedicone02](https://www.github.com/giuliopedicone02)
+- [@vincenzovillanova](https://www.github.com/vincenzovillanova)
 
 ## Feedback
 
