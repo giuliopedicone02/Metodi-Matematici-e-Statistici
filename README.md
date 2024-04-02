@@ -6,7 +6,8 @@
 Repository creata a scopo didattico per essere utilizzata come backup dei file creati a lezione.
 
 * **Cartella Appunti e Slide**: Comprende le dispense messe a disposizione dal docente per lo studio del corso.
-* **Cartella Codici**: Comprende i file Jupiter Notebook messi a disposizione dal docente.
+* **Cartella Codici**: Comprende i file Jupyter Notebook messi a disposizione dal docente.
+* **Cartella Esami**: Comprende gli esami svolti durante l'anno (Soluzioni personali, potrebbero non essere corrette e presentare errori)
 * **Cartella Esercizi**: Comprende gli esercizi presenti nelle slide fornite dal docente (Soluzioni personali, potrebbero non essere corrette e presentare errori)
 
 ## Authors
